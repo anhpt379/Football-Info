@@ -12,7 +12,6 @@ from operator import itemgetter
 from datetime import date as date_format
 from urllib import unquote
 from settings import main_menu, delta
-from operator import itemgetter
 
 reload(sys)
 sys.setdefaultencoding('utf-8')     # IGNORE:E1101
@@ -46,7 +45,7 @@ def comments(environ, start_response):
   data = []
   for i in comments:
     try:
-      if abs(i['date_public'] - date.today()).days <= delta:
+      if abs(i['date_public'] - date_format.today()).days <= delta:
         s = '<comment by="%s">%s</comment>' % (xml_format(i['by']),
                              xml_format(i['content']))
         data.append(s)
@@ -208,7 +207,7 @@ def controller(environ, start_response):
                 ('Content-Length', str(len(message)))]
       start_response(status, response_headers)
       return [data]  
-  except: # 500 Internal Server Error
+  except KeyboardInterrupt: # 500 Internal Server Error
     message = """
     <error>
       <status_code>500</status_code>

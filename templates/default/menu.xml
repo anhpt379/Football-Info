@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorlcupOdds version="$version" last_update="$last_update">
+    #for $menu in $menus
+    <menu href="$menu.href">$menu.name</menu>
+    #end for
+</WorlcupOdds>

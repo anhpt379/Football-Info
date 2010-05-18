@@ -88,32 +88,32 @@ def matches(environ, start_response):
   start_response(status, response_headers)
   return [data]
 
-def odd_info(environ, start_response):
+def bet_info(environ, start_response):
   match = unquote(environ['PATH_INFO']).split('|')[1]
   key = match + ': %s'
   
-  date = odd_info.get(key % 'date')
-  hour = odd_info.get(key % 'hour')
+  date = BET_INFO.get(key % 'date')
+  hour = BET_INFO.get(key % 'hour')
   time = '%s %s' % (date, hour)
   
-  team_1 = odd_info.get(key % 'team_1')
-  team_2 = odd_info.get(key % 'team_2')
+  team_1 = BET_INFO.get(key % 'team_1')
+  team_2 = BET_INFO.get(key % 'team_2')
   
-  ah_team_1 = odd_info.get(key % "ah_team_1")
-  ah_team_2 = odd_info.get(key % "ah_team_2")
-  ah = odd_info.get(key % "ah")
+  ah_team_1 = BET_INFO.get(key % "ah_team_1")
+  ah_team_2 = BET_INFO.get(key % "ah_team_2")
+  ah = BET_INFO.get(key % "ah")
   
-  ou_team_1 = odd_info.get(key % "ou_team_1")
-  ou_team_2 = odd_info.get(key % "ou_team_2")
-  ou = odd_info.get(key % "ou")
+  ou_team_1 = BET_INFO.get(key % "ou_team_1")
+  ou_team_2 = BET_INFO.get(key % "ou_team_2")
+  ou = BET_INFO.get(key % "ou")
     
-  ah1st_team_1 = odd_info.get(key % "ah1st_team_1")
-  ah1st_team_2 = odd_info.get(key % "ah1st_team_2")
-  ah1st = odd_info.get(key % "ah1st")
+  ah1st_team_1 = BET_INFO.get(key % "ah1st_team_1")
+  ah1st_team_2 = BET_INFO.get(key % "ah1st_team_2")
+  ah1st = BET_INFO.get(key % "ah1st")
   
-  ou1st_team_1 = odd_info.get(key % "ou1st_team_1")
-  ou1st_team_2 = odd_info.get(key % "ou1st_team_2")
-  ou1st = odd_info.get(key % "ou1st")
+  ou1st_team_1 = BET_INFO.get(key % "ou1st_team_1")
+  ou1st_team_2 = BET_INFO.get(key % "ou1st_team_2")
+  ou1st = BET_INFO.get(key % "ou1st")
   
   data = """
   <source>%s</source>
@@ -131,7 +131,7 @@ def odd_info(environ, start_response):
     +%-15s      @%s
     -%-15s      @%s
   </first_half>
-  """ % (odd_info.get('source'),
+  """ % (BET_INFO.get('source'),
          match, 
          time,
          team_1, ah, ah_team_1,
@@ -194,8 +194,8 @@ def controller(environ, start_response):
     elif path.startswith('/matches'):
       return matches(environ, start_response)
     
-    elif path.startswith('/odd_info'):
-      return odd_info(environ, start_response)
+    elif path.startswith('/bet_info'):
+      return bet_info(environ, start_response)
     
     # not found
     else:

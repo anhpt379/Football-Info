@@ -21,8 +21,8 @@ _last_update = s.st_mtime
 last_update = strftime("%d-%m-%Y", localtime(_last_update))
  
 status = '200 OK'
-description = '<livefootball last_update="%s">' % last_update
-description = description + '\n\t%s\n</livefootball>'
+description = '<FootballOdds last_update="%s">' % last_update
+description = description + '\n\t%s\n</FootballOdds>'
 BET_INFO = BetInfo()    
 
 #====== WSGI Apps ==========
@@ -30,7 +30,7 @@ BET_INFO = BetInfo()
 def menu(environ, start_response):
   data = []
   for i in range(len(main_menu)):
-    data.append('<menu ref="%s">%s</menu>' % (xml_format(main_menu[i][0]), 
+    data.append('<menu href="%s">%s</menu>' % (xml_format(main_menu[i][0]), 
                                               xml_format(main_menu[i][1])))
   data = '\n\t'.join(data)
   data = description % data
@@ -61,8 +61,11 @@ def matches(environ, start_response):
     t = [int(x) for x in str(date).split('/')]
     if date_format(t[2], t[1], t[0]) > date_format.today():
       hour = BET_INFO.get(key % 'hour')
-      s = '<match ref="bet_info|%s - %s (%s)" time="%s %s">%s - %s</match>' \
-                                          % (a, b, date, date, hour, a, b)
+      s = '''<match href="bet_info|%s - %s (%s)" 
+                    href2="odd_details|%s - %s (%s)" 
+                    time="%s %s">
+                      %s - %s
+              </match>''' % (a, b, date, a, b, date, date, hour, a, b)
       data.append(['%s %s' % (date, hour), s])
     else:
       pass
@@ -142,6 +145,73 @@ def bet_info(environ, start_response):
   start_response(status, response_headers)
   return [data]
 
+def odd_details(environ, start_response):
+  match = unquote(environ['PATH_INFO']).split('|')[1]
+  key = match + ': %s'
+  
+  date = BET_INFO.get(key % 'date')
+  hour = BET_INFO.get(key % 'hour')
+  
+  team_1 = BET_INFO.get(key % 'team_1')
+  team_2 = BET_INFO.get(key % 'team_2')
+  
+  ah_team_1 = BET_INFO.get(key % "ah_team_1")
+  ah_team_2 = BET_INFO.get(key % "ah_team_2")
+  ah = BET_INFO.get(key % "ah")
+  
+  ou_team_1 = BET_INFO.get(key % "ou_team_1")
+  ou_team_2 = BET_INFO.get(key % "ou_team_2")
+  ou = BET_INFO.get(key % "ou")
+    
+  ah1st_team_1 = BET_INFO.get(key % "ah1st_team_1")
+  ah1st_team_2 = BET_INFO.get(key % "ah1st_team_2")
+  ah1st = BET_INFO.get(key % "ah1st")
+  
+  ou1st_team_1 = BET_INFO.get(key % "ou1st_team_1")
+  ou1st_team_2 = BET_INFO.get(key % "ou1st_team_2")
+  ou1st = BET_INFO.get(key % "ou1st")
+  
+  data = """
+  <source>%s</source>
+  <date>%s</date>
+  <hour>%s</hour>
+  <team_1>%s</team_1>
+  <team_2>%s</team_2>
+  <ah>%s</ah>
+  <ah_team_1>%s</ah_team_1>
+  <ah_team_2>%s</ah_team_2>
+  <ou>%s</ou>
+  <ou_team_1>%s</ou_team_1>
+  <ou_team_2>%s</ou_team_2>
+  <ah1st>%s</ah1st>
+  <ah1st_team_1>%s</ah1st_team_1>
+  <ah1st_team_2>%s</ah1st_team_2>
+  <ou1st>%s</ou1st>
+  <ou1st_team_1>%s</ou1st_team_1>
+  <ou1st_team_2>%s</ou1st_team_2>
+  """ % (BET_INFO.get('source'),
+         date,
+         hour,
+         team_1,
+         team_2,
+         ah, 
+         ah_team_1,
+         ah_team_2,
+         ou,
+         ou_team_1,
+         ou_team_2,
+         ah1st,
+         ah1st_team_1,
+         ah1st_team_2,
+         ou1st,
+         ou1st_team_1,
+         ou1st_team_2
+         )
+  data = description % data
+  response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
+                      ('Content-Length', str(len(data)))]
+  start_response(status, response_headers)
+  return [data]
 
 #====== System Controller =============
 #
@@ -189,6 +259,9 @@ def controller(environ, start_response):
     
     elif path.startswith('/bet_info'):
       return bet_info(environ, start_response)
+    
+    elif path.startswith('/odd_details'):
+      return odd_details(environ, start_response)
     
     # not found
     else:

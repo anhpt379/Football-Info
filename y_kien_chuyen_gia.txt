@@ -1,22 +1,11 @@
-#! coding: utf-8
-"""
-- Những đoạn text dài trên 1 dòng cần đặt nằm giữa cặp 3 dấu ngoặc kép
-- Nếu cần sử dụng ký tự ngoặc kép trong đoạn nội dung, cần sử dụng ký tự thoát
-(bình thường là " thì cần chuyển thành \")
-"""
+Đoạn bình luận thứ nhất
 
-from datetime import date
 
-comments = [
-{'content': """Nội dung ý kiến""", 
- 'by': "Ai bình luận câu vừa rồi",
- 'date_public': date(2010, 05, 15)},
- 
-{'content': """Trận đấu đáng chú ý""", 
- 'by': """AloneRoad""",
- 'date_public': date(2010, 05, 15)},
+Các ý kiến bình luận được cập nhật theo ngày
 
-{'content': "", 
- 'by': "",
- 'date_public': ""},
-]
+
+Nội dung trong file này sẽ được hiển thị toàn bộ khi vào mục "Ý kiến chuyên gia"
+
+
+Ý kiến thứ 2 được phân cách với ý kiến 1 bằng 2 dấu Enter
+

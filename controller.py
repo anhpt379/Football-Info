@@ -40,17 +40,8 @@ def menu(environ, start_response):
   return [data]
 
 def comments(environ, start_response):
-  a = open('y_kien_chuyen_gia.txt').read()
-  exec(a)
-  data = []
-  for i in comments:
-    try:
-      if abs(i['date_public'] - date_format.today()).days <= delta:
-        s = '<comment by="%s">%s</comment>' % (xml_format(i['by']),
-                             xml_format(i['content']))
-        data.append(s)
-    except TypeError:
-      continue
+  a = open('y_kien_chuyen_gia.txt').read().strip()
+  data = ["<comment>%s</comment>" % x.strip() for x in a.split('\n\n')]
   data = '\n  '.join(data)
   data = description % data
   response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
@@ -76,9 +67,12 @@ def matches(environ, start_response):
     else:
       pass
   _data = sorted(data, key=itemgetter(0))
+  
   data = []
+  index = 0
   for row in _data:
-      data.append(row[1])
+    data.append(row[1].replace('<match ref', '<match index="%s" ref' % index))
+    index += 1
 
   data = '\n  '.join(data)
   data = description % data

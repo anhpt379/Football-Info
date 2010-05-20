@@ -74,7 +74,7 @@ def matches(environ, start_response):
   data = []
   index = 0
   for row in _data:
-    data.append(row[1].replace('<match ref', '<match index="%s" ref' % index))
+    data.append(row[1].replace('<match href', '<match index="%s" href' % index))
     index += 1
 
   data = '\n  '.join(data)

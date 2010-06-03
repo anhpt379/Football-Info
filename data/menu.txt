@@ -1,0 +1,24 @@
+{
+  "right_button": {
+    "type": "exit", 
+    "name": "Thoa\u0301t"
+  }, 
+  "items": [
+    {
+      "href": "ty_le_truc_tuyen/index.txt", 
+      "name": "\u1ef7 l\u1ec7 tr\u1ef1c tuy\u1ebfn"
+    }, 
+    {
+      "href": "thong_tin_ben_le/index.txt", 
+      "name": "Th\u00f4ng tin b\u00ean l\u1ec1"
+    }
+  ], 
+  "cache": "yes", 
+  "auto_refresh": "0", 
+  "form_title": "LiveFootball 2010", 
+  "type": "list", 
+  "left_button": {
+    "type": "select", 
+    "name": "Cho\u0323n"
+  }
+}

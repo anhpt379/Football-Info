@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorlcupOdds version="$version" last_update="$last_update">
+    #for $match in $matches
+    <match href="$match.href" 
+           href2="$match.href2" 
+           date="$match.date" 
+           hour="$match.hour">$match.team_1 - $match.team_2</match>
+    #end for
+</WorlcupOdds>

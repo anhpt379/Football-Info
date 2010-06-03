@@ -1,0 +1,16 @@
+{
+    "type": "richtext",
+    "cache": "no",
+    "left_button": {
+                     "type": "reload", 
+                     "name": "Cập nhật lại"
+                   },
+    "right_button": {
+                     "type": "hyperlink", 
+                     "name": "Trở lại", 
+                     "url": "[Worldcup] Danh sách trận đấu đang và sắp diễn ra"
+                    },
+    "auto_refresh": "60000",
+    "form_title": "$team_1 - $team_2",
+    "info": "<b>$team_1 - $team_2</b><i>$date $time</i>"
+}

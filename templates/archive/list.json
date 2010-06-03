@@ -1,0 +1,9 @@
+{
+  "type": "list",
+  "cache": "{{cache_status}}",
+  "auto_refresh": "{{auto_refresh}}",             
+  "left_button": {"type": "{{left_button.type}}", "name": "{{left_button.name}}"},
+  "right_button": {"type": "{{left_button.type}}", "name": "{{right_button.name}}"},
+  "form_title": "{{form_title}}",
+  "items": [{% for item in items %}{"href": "{{item.href}}", "name": "{{item.name}}"}, {% endfor %}],
+}

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/131/trunk/spitfire/compiler
+END
+scanner.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/1/trunk/spitfire/compiler/scanner.py
+END
+parser.g
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/131/trunk/spitfire/compiler/parser.g
+END
+parser.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/131/trunk/spitfire/compiler/parser.py
+END
+util.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/130/trunk/spitfire/compiler/util.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/1/trunk/spitfire/compiler/__init__.py
+END
+visitor.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/118/trunk/spitfire/compiler/visitor.py
+END
+optimizer.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/129/trunk/spitfire/compiler/optimizer.py
+END
+codegen.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/118/trunk/spitfire/compiler/codegen.py
+END
+walker.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/!svn/ver/55/trunk/spitfire/compiler/walker.py
+END
+analyzer.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/129/trunk/spitfire/compiler/analyzer.py
+END
+xhtml2ast.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/1/trunk/spitfire/compiler/xhtml2ast.py
+END
+ast.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/123/trunk/spitfire/compiler/ast.py
+END

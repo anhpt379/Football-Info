@@ -12,8 +12,8 @@ def start_server():
     system('python controller.py')
 
 def start_database():
-    system('bin/redis/redis-server &')
-    
+    system('bin/redis/redis-server bin/redis/redis.conf')
+
 def build():
     system('python configure.py')
 

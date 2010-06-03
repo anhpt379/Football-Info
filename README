@@ -2,3 +2,58 @@ Football Odds
 =============
 
 Server-side of Football Odds client
+
+Requirements
+============
+
+  - ssh
+  - rsync
+  - server_controller.exe
+  (- python
+   - paramiko)
+   
+   
+ Nhập liệu
+ =========
+ 
+  1. type
+    - list
+    - richtext
+    - html
+  2. cache
+    - yes
+    - no
+  3. left_button
+    - type:
+      + select
+      + hyperlink
+      + exit
+      + reload
+    - name
+    - url (only hyperlink type)
+  4. right_button
+    - type:
+      + select
+      + hyperlink
+      + exit
+      + reload
+    - name
+    - url (only hyperlink type)
+  5. auto_refresh (ms)
+  6. items (for list only)
+    - item
+      + name
+      + href
+  7. content_url (for html only)
+    - url
+  8. info (for richtext)
+    - html code
+    
+ Extra Info
+ ==========
+  - IP request: timestamp > log
+  - Stats:
+    + req/day
+    + ip/day
+    + newip/day
+    + sms/day 

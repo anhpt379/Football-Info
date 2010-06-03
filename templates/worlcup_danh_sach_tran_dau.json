@@ -1,0 +1,22 @@
+{
+    "type": "list",
+    "cache": "no",
+    "left_button": {
+                     "type": "select", 
+                     "name": "Chọn"
+                   },
+    "right_button": {
+                     "type": "hyperlink", 
+                     "name": "Trở lại", 
+                     "url": "Tỷ lệ trực tuyến"
+                    },
+    "auto_refresh": "0",
+    "form_title": "Danh sách trận đấu",
+    "items": [ #for $i in $matches
+               {
+                 "href": "$i.team1 - $i.team2 ($i.date)", 
+                 "name": "$i.team1 - $i.team2"
+               },
+               #end for
+             ]
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FootballOdds version="$version" last_update="$last_update">
+    # for match in matches
+    <match>
+        <source>$source</source>
+        <info>$match.info</info>
+        <status>$match.status</status>
+        <odd>
+            <fulltime>
+                
+            </fulltime>
+            <firsthaft>
+                
+            </firsthaft>
+        </odd>
+    </match>
+    # end for
+</FootballOdds>

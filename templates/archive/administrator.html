@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html><head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Football Info 2010 - Administrator</title> 
+<link type="text/css" rel="stylesheet" href="http://www.jotform.com/css/styles/form.css"/><link type="text/css" rel="stylesheet" href="http://www.jotform.com/css/styles/big.css" /><link href="http://www.jotform.com/css/calendarview.css" rel="stylesheet" type="text/css" /><style type="text/css"> 
+    .form-label{
+        width:120px !important;
+    }
+    .form-label-left{
+        width:120px !important;
+    }
+    .form-line{
+        padding:10px;
+    }
+    .form-label-right{
+        width:120px !important;
+    }
+    body, html{
+        margin:0;
+        padding:0;
+        background:rgb(241, 241, 241) url(http://www.jotform.com/images/big-back.png) repeat-x;
+    }
+ 
+    .form-all{
+        margin:0px auto;
+        padding-top:0px;
+        width:650px !important;
+        background:rgb(241, 241, 241) url(http://www.jotform.com/images/big-back.png) repeat-x;
+        color:black;
+        font-family:Tahoma;
+        font-size:14px;
+    }
+</style> 
+ 
+<script src="http://www.jotform.com/min/g=jotform&" type="text/javascript"></script> 
+<script type="text/javascript"> 
+ 
+   JotForm.init(function(){
+      JotForm.description('screen_id', 'ID của màn hình này (duy nhất)');
+      JotForm.description('input_3', 'Loại màn hình hiển thị');
+      JotForm.description('input_4', 'Nếu chọn yes, dữ liệu sẽ chỉ tải về client một lần duy nhất và cache trong bộ nhớ của điện thoại');
+      $('input_9').spinner({ imgPath:'http://www.jotform.com/images/', width: '60', maxValue:'', minValue:'', allowNegative: false, addAmount: 1, value:'0' });
+      JotForm.description('input_9', 'Tự động refresh màn hình này sau bao nhiêu mili-giây?');
+      JotForm.description('input_10', 'Tên của nút điều khiển phía dưới bên trái màn hình điện thoại ');
+      JotForm.description('input_12', 'Loại lệnh nút này sẽ thực hiện');
+      JotForm.description('input_11', 'Chỉ điền nếu chọn loại nút ở trên là Go to');
+      JotForm.description('input_13', 'Tên của nút điều khiển phía dưới bên phải màn hình điện thoại ');
+      JotForm.description('input_14', 'Loại lệnh nút này sẽ thực hiện');
+      JotForm.description('input_15', 'Chỉ điền nếu chọn loại nút ở trên là Go to');
+      JotForm.description('input_16', 'Chỉ điền nếu chọn loại hiển thị là HTML');
+      JotForm.description('input_19', 'Chỉ điền nếu chọn loại hiển thị là Info');
+      JotForm.description('input_23', 'Chỉ điền nếu chọn loại hiển thị là Richtext');
+   });
+</script> 
+</head> 
+<body> 
+<form class="jotform-form" action="http://localhost:8888/add" method="get" name="AddScreen" id="1534611120" accept-charset="utf-8"> 
+    <div class="form-all"> 
+        <ul class="form-section"> 
+            <li id="id_5" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h2 id="header_5" class="form-header"> 
+                        Add new screen...
+                    </h2> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_1"> 
+                <label class="form-label-left" id="label_1" for="input_1"> 
+                    ScreenID<span class="form-required">*</span> 
+                </label> 
+                <div id="id_1" class="form-input"> 
+                    <input type="text" class="form-textbox validate[required]" id="screen_id" name="screen_id" size="50" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_3"> 
+                <label class="form-label-left" id="label_3" for="input_3"> 
+                    Type<span class="form-required">*</span> 
+                </label> 
+                <div id="id_3" class="form-input"> 
+                    <select class="form-dropdown validate[required]" style="width:150px" id="input_3" name="type"> 
+                        <option>  </option> 
+                        <option selected="selected" value="list"> list </option> 
+                        <option value="richtext"> richtext </option> 
+                        <option value="html"> html </option> 
+                        <option value="info"> info </option> 
+                    </select> 
+                </div>
+            </li> 
+            <li class="form-line" id="id_4"> 
+                <label class="form-label-left" id="label_4" for="input_4"> Cache </label> 
+                <div id="id_4" class="form-input"> 
+                    <div class="form-multiple-column"><span class="form-radio-item"><input type="radio" class="form-radio" id="input_4_0" name="cache" value="yes" /> 
+                            <label for="input_4_0"> yes </label></span><span class="clearfix"></span><span class="form-radio-item"><input type="radio" class="form-radio" id="input_4_1" name="cache" checked="checked" value="no" /> 
+                            <label for="input_4_1"> no </label></span><span class="clearfix"></span> 
+                    </div> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_9"> 
+                <label class="form-label-left" id="label_9" for="input_9"> Auto Refresh </label> 
+                <div id="id_9" class="form-input"> 
+                    <input type="text" id="input_9" name="auto_refresh" /> 
+                </div> 
+            </li> 
+            <li id="id_6" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_6" class="form-header"> 
+                        Left Button
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_10"> 
+                <label class="form-label-left" id="label_10" for="input_10"> Name </label> 
+                <div id="id_10" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_10" name="left_button_name" size="50" value="Chọn" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_12"> 
+                <label class="form-label-left" id="label_12" for="input_12"> Type </label> 
+                <div id="id_12" class="form-input"> 
+                    <select class="form-dropdown" style="width:150px" id="input_12" name="left_button_type"> 
+                        <option>  </option> 
+                        <option selected="selected" value="select"> select </option> 
+                        <option value="go to"> go to </option> 
+                        <option value="reload"> reload </option> 
+                        <option value="exit"> exit </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_11"> 
+                <label class="form-label-left" id="label_11" for="input_11"> ScreenID </label> 
+                <div id="id_11" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_11" name="left_button_url" size="50" /> 
+                </div> 
+            </li> 
+            <li id="id_7" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_7" class="form-header"> 
+                        Right Button
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_13"> 
+                <label class="form-label-left" id="label_13" for="input_13"> Name </label> 
+                <div id="id_13" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_13" name="right_button_name" size="50" value="Trở lại" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_14"> 
+                <label class="form-label-left" id="label_14" for="input_14"> Type </label> 
+                <div id="id_14" class="form-input"> 
+                    <select class="form-dropdown" style="width:150px" id="input_14" name="right_button_type"> 
+                        <option>  </option> 
+                        <option value="select"> select </option> 
+                        <option selected="selected" value="go to"> go to </option> 
+                        <option value="reload"> reload </option> 
+                        <option value="exit"> exit </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_15"> 
+                <label class="form-label-left" id="label_15" for="input_15"> ScreenID </label> 
+                <div id="id_15" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_15" name="right_button_url" size="50" /> 
+                </div> 
+            </li> 
+            <li id="id_17" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_17" class="form-header"> 
+                        Extra Info
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_16"> 
+                <label class="form-label-left" id="label_16" for="input_16"> ContentURL </label> 
+                <div id="id_16" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_16" name="content_url" size="50" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_19"> 
+                <label class="form-label-left" id="label_19" for="input_19"> Info </label> 
+                <div id="id_19" class="form-input"> 
+                    <textarea id="input_19" class="form-textarea" name="info" cols="46" rows="6"></textarea> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_23"> 
+                <label class="form-label-left" id="label_23" for="input_23"> Richtext </label> 
+                <div id="id_23" class="form-input"> 
+                    <textarea id="input_23" class="form-textarea" name="richtext" cols="46" rows="6"></textarea> 
+                </div> 
+            </li> 
+            <li id="id_24" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_24" class="form-header"> 
+                        Items
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_20"> 
+                <label class="form-label-top" id="label_20" for="input_20"> name </label> 
+                <div id="id_20" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_20" name="item1_name" size="30" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_22"> 
+                <label class="form-label-top" id="label_22" for="input_22"> ScreenID </label> 
+                <div id="id_22" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_22" name="item1_url" size="25" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_25"> 
+                <label class="form-label-top" id="label_25" for="input_25"> name </label> 
+                <div id="id_25" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_25" name="item2_name" size="30" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_26"> 
+                <label class="form-label-top" id="label_26" for="input_26"> ScreenID </label> 
+                <div id="id_26" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_26" name="item2_url" size="25" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_2"> 
+                <div id="id_2" class="form-input-wide"> 
+                    <div style="text-align:center"> 
+                        <button id="input_2" type="submit" class="form-submit-button"> 
+                            Lưu
+                        </button> 
+                        &nbsp;
+                        <button id="input_reset_2" type="reset" class="form-submit-reset"> 
+                            Clear Form
+                        </button> 
+                    </div> 
+                </div> 
+            </li> 
+        </ul> 
+    </div> 
+    <script type="text/javascript"> 
+        document.getElementById("si" + "mple" + "_spc").value = "1534611120-1534611120";
+    </script> 
+</form></body> 
+</html>

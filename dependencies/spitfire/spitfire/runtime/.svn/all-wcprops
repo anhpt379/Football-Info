@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/!svn/ver/121/trunk/spitfire/runtime
+END
+filters.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/118/trunk/spitfire/runtime/filters.py
+END
+runner.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/50/trunk/spitfire/runtime/runner.py
+END
+template.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/118/trunk/spitfire/runtime/template.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/119/trunk/spitfire/runtime/__init__.py
+END
+_udn.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/108/trunk/spitfire/runtime/_udn.c
+END
+udn.py
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/110/trunk/spitfire/runtime/udn.py
+END
+repeater.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/121/trunk/spitfire/runtime/repeater.py
+END

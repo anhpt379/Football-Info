@@ -1,304 +1,124 @@
-#!/usr/bin/env python
+#! /usr/bin/python
 #! coding: utf-8
 # pylint: disable-msg=W0311
-import sys, os
-sys.path.append(os.path.dirname(__file__))
 
-from lib.tornado import wsgi, httpserver, ioloop
-from lib.text_processing import xml_format, raw_unicode_string
-from lib.database import Cache, Comment, Result, BetInfo   
-from time import strftime, localtime
-from operator import itemgetter
-from datetime import date as date_format
-from urllib import unquote
-from settings import main_menu, delta
 
-reload(sys)
-sys.setdefaultencoding('utf-8')     # IGNORE:E1101
- 
-s = os.stat(__file__)
-_last_update = s.st_mtime
-last_update = strftime("%d-%m-%Y", localtime(_last_update))
- 
-status = '200 OK'
-description = '<FootballOdds last_update="%s">' % last_update
-description = description + '\n\t%s\n</FootballOdds>'
-BET_INFO = BetInfo()    
+from lib.server import route, TornadoServer, run, request, response
+from database import Screen, Log
+from simplejson import dumps
+from jinja2 import Environment, PackageLoader
+from ast import literal_eval as eval
 
-#====== WSGI Apps ==========
-#
-def menu(environ, start_response):
-  data = []
-  for i in range(len(main_menu)):
-    data.append('<menu href="%s">%s</menu>' % (xml_format(main_menu[i][0]), 
-                                              xml_format(main_menu[i][1])))
-  data = '\n\t'.join(data)
-  data = description % data
-  response_headers = [('Content-Type', 'text/xml'),
-            ('Content-Length', str(len(data)))]
-  start_response(status, response_headers)
-  return [data]
 
-def comments(environ, start_response):
-  a = open('y_kien_chuyen_gia.txt').read().strip()
-  data = ["<comment>%s</comment>" % x.strip() for x in a.split('\n\n')]
-  data = '\n  '.join(data)
-  data = description % data
-  response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                      ('Content-Length', str(len(data)))]
-  start_response(status, response_headers)
-  return [data]
+db = Screen()
+log = Log()
 
-def matches(environ, start_response):
-  """Lấy danh sách các trận sẽ thi đấu trong Worldcup 2010."""
-  data = []
-  for key in BET_INFO.list_keys():
-    a = BET_INFO.get(key % 'team_1')
-    b = BET_INFO.get(key % 'team_2')
-    
-    date = BET_INFO.get(key % 'date')
-    #TODO: Compare with now() to remove finished matches.
-    t = [int(x) for x in str(date).split('/')]
-    if date_format(t[2], t[1], t[0]) > date_format.today():
-      hour = BET_INFO.get(key % 'hour')
-      s = '''<match href="bet_info|%s - %s (%s)" 
-                    href2="odd_details|%s - %s (%s)" 
-                    time="%s %s">
-                      %s - %s
-              </match>''' % (a, b, date, a, b, date, date, hour, a, b)
-      data.append(['%s %s' % (date, hour), s])
-    else:
-      pass
-  _data = sorted(data, key=itemgetter(0))
-  
-  data = []
-  index = 0
-  for row in _data:
-    data.append(row[1].replace('<match href', '<match index="%s" href' % index))
-    index += 1
+env = Environment(loader=PackageLoader('views', 'templates'))
 
-  data = '\n  '.join(data)
-  data = description % data
-  response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                      ('Content-Length', str(len(data)))]
-  start_response(status, response_headers)
-  return [data]
 
-def bet_info(environ, start_response):
-  match = unquote(environ['PATH_INFO']).split('|')[1]
-  key = match + ': %s'
-  
-  date = BET_INFO.get(key % 'date')
-  hour = BET_INFO.get(key % 'hour')
-  time = '%s %s' % (date, hour)
-  
-  team_1 = BET_INFO.get(key % 'team_1')
-  team_2 = BET_INFO.get(key % 'team_2')
-  
-  ah_team_1 = BET_INFO.get(key % "ah_team_1")
-  ah_team_2 = BET_INFO.get(key % "ah_team_2")
-  ah = BET_INFO.get(key % "ah")
-  
-  ou_team_1 = BET_INFO.get(key % "ou_team_1")
-  ou_team_2 = BET_INFO.get(key % "ou_team_2")
-  ou = BET_INFO.get(key % "ou")
-    
-  ah1st_team_1 = BET_INFO.get(key % "ah1st_team_1")
-  ah1st_team_2 = BET_INFO.get(key % "ah1st_team_2")
-  ah1st = BET_INFO.get(key % "ah1st")
-  
-  ou1st_team_1 = BET_INFO.get(key % "ou1st_team_1")
-  ou1st_team_2 = BET_INFO.get(key % "ou1st_team_2")
-  ou1st = BET_INFO.get(key % "ou1st")
-  
-  data = """
-  <source>%s</source>
-  <match>%s</match>
-  <time>%s</time>
-  <full_time>
-    %-15s: +%s  @%s
-    %-15s: -%s  @%s
-    +%-15s      @%s
-    -%-15s      @%s
-  </full_time>
-  <first_half>
-    %-15s: +%s  @%s
-    %-15s: -%s  @%s
-    +%-15s      @%s
-    -%-15s      @%s
-  </first_half>
-  """ % (BET_INFO.get('source'),
-         match, 
-         time,
-         team_1, ah, ah_team_1,
-         team_2, ah, ah_team_2,
-         ou, ou_team_1,
-         ou, ou_team_2,
-         team_1, ah1st, ah1st_team_1,
-         team_2, ah1st, ah1st_team_2,
-         ou1st, ou1st_team_1,
-         ou1st, ou1st_team_2
-         )
-  data = description % data
-  response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                      ('Content-Length', str(len(data)))]
-  start_response(status, response_headers)
-  return [data]
+@route("/add")
+def add_screen():
+  data = request.params
+  screen_id = data['screen_id']
+  form_title = data["form_title"]
 
-def odd_details(environ, start_response):
-  match = unquote(environ['PATH_INFO']).split('|')[1]
-  key = match + ': %s'
-  
-  date = BET_INFO.get(key % 'date')
-  hour = BET_INFO.get(key % 'hour')
-  
-  team_1 = BET_INFO.get(key % 'team_1')
-  team_2 = BET_INFO.get(key % 'team_2')
-  
-  ah_team_1 = BET_INFO.get(key % "ah_team_1")
-  ah_team_2 = BET_INFO.get(key % "ah_team_2")
-  ah = BET_INFO.get(key % "ah")
-  
-  ou_team_1 = BET_INFO.get(key % "ou_team_1")
-  ou_team_2 = BET_INFO.get(key % "ou_team_2")
-  ou = BET_INFO.get(key % "ou")
-    
-  ah1st_team_1 = BET_INFO.get(key % "ah1st_team_1")
-  ah1st_team_2 = BET_INFO.get(key % "ah1st_team_2")
-  ah1st = BET_INFO.get(key % "ah1st")
-  
-  ou1st_team_1 = BET_INFO.get(key % "ou1st_team_1")
-  ou1st_team_2 = BET_INFO.get(key % "ou1st_team_2")
-  ou1st = BET_INFO.get(key % "ou1st")
-  
-  data = """
-  <source>%s</source>
-  <date>%s</date>
-  <hour>%s</hour>
-  <team_1>%s</team_1>
-  <team_2>%s</team_2>
-  <ah>%s</ah>
-  <ah_team_1>%s</ah_team_1>
-  <ah_team_2>%s</ah_team_2>
-  <ou>%s</ou>
-  <ou_team_1>%s</ou_team_1>
-  <ou_team_2>%s</ou_team_2>
-  <ah1st>%s</ah1st>
-  <ah1st_team_1>%s</ah1st_team_1>
-  <ah1st_team_2>%s</ah1st_team_2>
-  <ou1st>%s</ou1st>
-  <ou1st_team_1>%s</ou1st_team_1>
-  <ou1st_team_2>%s</ou1st_team_2>
-  """ % (BET_INFO.get('source'),
-         date,
-         hour,
-         team_1,
-         team_2,
-         ah, 
-         ah_team_1,
-         ah_team_2,
-         ou,
-         ou_team_1,
-         ou_team_2,
-         ah1st,
-         ah1st_team_1,
-         ah1st_team_2,
-         ou1st,
-         ou1st_team_1,
-         ou1st_team_2
-         )
-  data = description % data
-  response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                      ('Content-Length', str(len(data)))]
-  start_response(status, response_headers)
-  return [data]
+  type = request.params['type']
+  if type == "list":
+    template = env.get_template('list.json')
+    data["items"] = []
+    n = 1
+    for i in range(1, 220):
+      try:
+        item = {}
+        item['name'] = data["item%d_name" % i]
+        try:
+          item['href'] = data["item%d_url" % i]
+        except KeyError:
+          item['href'] = ""
 
-#====== System Controller =============
-#
-def controller(environ, start_response):
-  """ URI Mapper and Controller """
-  path = environ['PATH_INFO']
+        if item['name'] != "":
+
+          item['id'] = "item%d" % n
+          n += 1
+          data["items"].append(item)
+      except KeyError:
+        continue
+  elif type == "info":
+    template = env.get_template('info.json')
+  elif type == "richtext":
+    data['richtext'] = data['richtext'].replace("\r\n", " ")
+    template = env.get_template('richtext.json')
+  elif type == "html":
+    template = env.get_template('html.json')
+
+  content = template.render(data)
+#  content = dumps(eval(content), indent=2)
+  db.add_screen(screen_id, form_title, content)
+  print content
+
+  template = env.get_template('manager.html')
+  data["screens_list"] = db.get_suggest()
+  return template.render(data)
+
+
+@route('/edit')
+def edit():
+  data = db.get(request.params['screen_id'])
+  data = eval(data)
+  data["screen_id"] = request.params['screen_id']
+  data["form_title"] = db.get_cache(request.params['screen_id'])["form_title"]
+
   try:
-    # default request
-    if path.startswith('/favicon.ico'):
-      response_headers = [('Content-Type', 'text/plain; charset="UTF-8"'),
-              ('Content-Length', 0)]
-      start_response(status, response_headers)
-      return ['']
-    elif path.startswith('/about'): # something about me :)
-      message = """
-                <about>
-                  <author>
-                    AloneRoad
-                  </author>
-                  
-                  <email>
-                    AloneRoad@Gmail.com
-                  </email>
-                  
-                  <mobile_phone>
-                    +84-167-345-0-799
-                  </mobile_phone>
-                </about>
-                """
-      data = description % message
-      response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                ('Content-Length', str(len(message)))]
-      start_response(status, response_headers)
-      return [data] 
-    
-    # my app run here
-    elif path.startswith('/menu'):
-      return menu(environ, start_response)
-    
-    elif path.startswith('/comments'):
-      return comments(environ, start_response)
-    
-    elif path.startswith('/matches'):
-      return matches(environ, start_response)
-    
-    elif path.startswith('/bet_info'):
-      return bet_info(environ, start_response)
-    
-    elif path.startswith('/odd_details'):
-      return odd_details(environ, start_response)
-    
-    # not found
-    else:
-      message = """<error>
-              <status_code>400</status_code>
-              <description>Yêu cầu không hợp lệ</description>
-             </error>"""
-      data = description % message
-      response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-                ('Content-Length', str(len(message)))]
-      start_response(status, response_headers)
-      return [data]  
-  except KeyboardInterrupt: # 500 Internal Server Error
-    message = """
-    <error>
-      <status_code>500</status_code>
-      <description>
-        Opps! Thực lòng tôi không mong muốn lỗi này xuất hiện đâu :(
-      </description>
-    </error>"""
-    data = description % message
-    response_headers = [('Content-Type', 'text/xml; charset="UTF-8"'),
-              ('Content-Length', str(len(message)))]
-    start_response(status, response_headers)
-    return [data] 
-
-if __name__ == '__main__':
-  try:
-    port = int(sys.argv[1])
+    data["right_button"]["form_title"] = db.get_cache(data["right_button"]["url"])["form_title"]
+    data["left_button"]["form_title"] = db.get_cache(data["left_button"]["url"])["form_title"]
   except:
-    print """
-    running on 8000...
-    """
-#    sys.exit()
-    port = 8000
+    pass
 
-  container = wsgi.WSGIContainer(controller)   
-  http_server = httpserver.HTTPServer(container) 
-  http_server.listen(port)             
-  ioloop.IOLoop.instance().start()    
+  if 'items' in data.keys():
+    for i in data['items']:
+      try:
+        form_title = db.get_cache(i["href"])["form_title"]
+        if form_title:
+          i['form_title'] = form_title
+      except:
+        continue
+  template = env.get_template('edit.html')
+  data["screens_list"] = db.get_suggest()
+  return template.render(data)
+
+
+@route("/manager")
+def manager():
+  data = {}
+  data["screens_list"] = db.get_suggest()
+  template = env.get_template('manager.html')
+  data["screens_list"] = db.get_suggest()
+  return template.render(data)
+
+@route("/favicon.ico")
+def favicon():
+  return ''
+
+@route('/list')
+def list():
+  try:
+    return db.get_list()
+  except:
+    return 'None'
+
+
+@route('/open')
+def open():
+  response.header['Content-Type'] = 'application/json'
+  log.insert(request.address)
+  data = db.get(request.params['screen_id'])
+  content = dumps(eval(data), indent=2, ensure_ascii=False)
+  return content
+
+
+def stats():
+  pass
+
+
+if __name__ == "__main__":
+  run(server=TornadoServer, port=8888)

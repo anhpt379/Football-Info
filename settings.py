@@ -1,25 +1,26 @@
 #! /usr/bin/python
 #! coding: utf-8
-refresh_time = 60   # Time to re-run crawler
+SERVER_PORT = '8080'
+SECRET_KEY = ""
 
-#======= Main Menu ========
-#
-main_menu = [('matches',  'Tỷ lệ trận đấu'),
-             ('results',  'Kết quả các trận đã thi đấu'),
-             ('comments', 'Ý kiến chuyên gia'),
-             ('tipster',  'Góc tipster'),
-             ('news',     'Tin tức Worldcup')]
+## Crawler settings
+# 
+REFRESH_TIME = 60   # Time to re-run crawler
 
-#======= Comments ========
+
+
+
+## Comments
 #
 delta = 2   # display comments of next 2 days
 
 
-#======= Database config ======
+## Database config
 #
 HOST = 'localhost'
-CACHE = 1   # database id
-COMMENT = 2
+PORT = 6333
+SCREEN = 1   # database id
+LOG = 2
 BET_INFO = 3
 RESULT = 5
-
+CACHE = 6

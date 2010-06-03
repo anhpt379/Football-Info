@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 23
+/svn/!svn/ver/132/trunk
+END
+LICENSE
+K 25
+svn:wc:ra_dav:version-url
+V 29
+/svn/!svn/ver/1/trunk/LICENSE
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 27
+/svn/!svn/ver/78/trunk/TODO
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/108/trunk/setup.py
+END
+CHANGES
+K 25
+svn:wc:ra_dav:version-url
+V 31
+/svn/!svn/ver/118/trunk/CHANGES
+END
+yappsrt.py
+K 25
+svn:wc:ra_dav:version-url
+V 33
+/svn/!svn/ver/97/trunk/yappsrt.py
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 32
+/svn/!svn/ver/118/trunk/Makefile
+END

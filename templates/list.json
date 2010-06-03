@@ -1,0 +1,27 @@
+{
+    "type": "list",
+    "cache": "{{cache}}",
+    "left_button": {
+                     "type": "{{left_button_type}}", 
+                     "name": "{{left_button_name}}",
+                     "url": "{{left_button_url}}"
+                   },
+    "right_button": {
+                     "type": "{{right_button_type}}", 
+                     "name": "{{right_button_name}}", 
+                     "url": "{{right_button_url}}"
+                    },
+    "auto_refresh": "{{auto_refresh}}",
+    "form_title": "{{form_title}}",
+    "items": [ 
+              {% for item in items %}
+               {
+                 "item_name": "{{ item.id }}_name",
+                 "item_url": "{{ item.id }}_url",
+                 "href": "{{item.href}}", 
+                 "name": "{{item.name}}"
+               },
+               {% endfor %}
+             ]
+}
+

@@ -1,0 +1,76 @@
+<HTML>
+ <head>
+   <title>Football Info 2010 Administrator</title>
+   <meta http-equiv="Content-Type"
+content="text/html;charset=utf-8" />
+   <script type="text/javascript" src="js/mootools.js"></script>
+<script type="text/javascript" src="js/moocheck.js"></script>
+ </head>
+
+ <body>
+  <form action="add" method="POST">
+  <p>
+    ScreenID: <input type="text" name="screen_id" size="25"> <br/>
+  </p>
+  <p>
+    Loại:     <select name="type">
+                <option value="list">Danh sách
+                <option value="richtext">Richtext
+                <option value="html">HTML
+                <option value="info">Info 
+              </select> <br/>
+  </p>
+  <p>
+    Cache:    <input type="radio" name="cache" value="yes">Có
+              <input type="radio" name="cache" value="no">Không
+  </p>
+    Auto refresh: <input type="text" name="auto_refresh" size="25"> <br/>
+    Nút trái: <br/>
+      Tên hiển thị: <input type="text" name="left_button_name" size="25"> <br/>
+      Loại:         <select name="left_button_type">
+                      <option value="select">Select
+                      <option value="reload">Reload
+                      <option value="hyperlink">Go to
+                      <option value="exit">Exit
+                    </select> <br/>
+      ScreenID:     <input type="text" name="left_button_name" size="25"> (nếu chọn loại là Go to)<br/>
+    
+    Nút phải: 
+      Tên hiển thị: <input type="text" name="right_button_name" size="25"> <br/>
+      Loại:         <select name="right_button_type">
+                      <option value="select">Select
+                      <option value="reload">Reload
+                      <option value="hyperlink">Go to
+                      <option value="exit">Exit
+                    </select> <br/>
+      ScreenID:     <input type="text" name="right_button_name" size="25"> (nếu chọn loại là Go to)<br/>
+         
+    
+    Content URL:   <input type="text" name="screen_id" size="25"> (nếu sử dụng loại  hiển thị là HTML)<br/>
+    Richtext: 
+                   <textarea name="info" rows="5" cols="25">Enter HTML Code here</textarea> <br/>
+    
+    Info: 
+                   <textarea name="info" rows="5" cols="25">Enter plain-text only</textarea> <br/>
+    Danh mục:  <br/>  
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/>
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+    Tên <input type="text" name="item_name" size="25"> ScreenID <input type="text" name="item_href" size="25"><br/> 
+     
+    
+       
+    <input type="submit" value="Lưu" />
+  </form>
+
+ </body>
+</html>

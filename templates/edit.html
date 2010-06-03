@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html><head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>Add Screen...</title> 
+<link type="text/css" rel="stylesheet" href="http://www.jotform.com/css/styles/form.css"/><link type="text/css" rel="stylesheet" href="http://www.jotform.com/css/styles/jottheme.css" /><link href="http://www.jotform.com/css/calendarview.css" rel="stylesheet" type="text/css" /><style type="text/css"> 
+    .form-label{
+        width:120px !important;
+    }
+    .form-label-left{
+        width:120px !important;
+    }
+    .form-line{
+        padding:10px;
+    }
+    .form-label-right{
+        width:120px !important;
+    }
+    body, html{
+        margin:0;
+        padding:0;
+        background:#FFFFFF;
+    }
+ 
+    .form-all{
+        margin:0px auto;
+        padding-top:0px;
+        width:750px !important;
+        background:#FFFFFF;
+        color:#000000;
+        font-family:Tahoma;
+        font-size:13px;
+    }
+</style> 
+ 
+<script src="http://www.jotform.com/min/g=jotform&" type="text/javascript"></script> 
+<script type="text/javascript"> 
+ 
+   JotForm.init(function(){
+      $('input_9').spinner({ imgPath:'http://www.jotform.com/images/', width: '60', maxValue:'', minValue:'', allowNegative: false, addAmount: 1, value:'0' });
+      JotForm.description('input_16', 'Chỉ điền nếu chọn loại hiển thị là HTML');
+      JotForm.description('input_19', 'Chỉ điền nếu chọn loại hiển thị là Info');
+      JotForm.description('input_23', 'Chỉ điền nếu chọn loại hiển thị là Richtext');
+   });
+</script> 
+</head> 
+<body> 
+
+
+<form class="jotform-form" action="http://localhost:8888/edit" method="get" name="edit_screen_content" id="1532639198" accept-charset="utf-8"> 
+    <div class="form-all"> 
+        <ul class="form-section"> 
+            <li id="id_50" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h2 id="header_5" class="form-header"> 
+                        Chỉnh sửa
+                    </h2> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_1"> 
+                <label class="form-label-left" id="label_1" for="input_1"> Edit </label> 
+                <div id="id_1" class="form-input"> 
+                    <select class="form-dropdown" style="width:578px" id="input_1" name="screen_id"> 
+                        <option>  </option> 
+                      {% for screen in screens_list: %}  
+                        <option value="{{screen.screen_id}}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_2"> 
+                <div id="id_2" class="form-input-wide"> 
+                    <div style="margin-left:635px"> 
+                        <button id="input_2" type="submit" class="form-submit-button"> 
+                            <b>Chỉnh sửa</b>
+                        </button> 
+                    </div> 
+                </div> 
+            </li> 
+        </ul> 
+    </div> 
+    <script type="text/javascript"> 
+        document.getElementById("si" + "mple" + "_spc").value = "1532639198-1532639198";
+    </script> 
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form class="jotform-form" action="http://localhost:8888/add" method="get" name="form_1534611120" id="1534611120" accept-charset="utf-8"> 
+    <div class="form-all"> 
+        <ul class="form-section"> 
+            <li id="id_5" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h2 id="header_5" class="form-header"> 
+                        Tạo mới
+                    </h2> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_1"> 
+                <label class="form-label-top" id="label_1" for="input_1"> 
+                    ScreenID<span class="form-required">*</span> 
+                </label> 
+                <div id="id_1" class="form-input-wide"> 
+                    <input type="text" class="form-textbox validate[required]" id="input_1" name="screen_id" size="60" value="{{ screen_id }}"/> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_3"> 
+                <label class="form-label-top" id="label_3" for="input_3"> 
+                    Type<span class="form-required">*</span> 
+                </label> 
+                <div id="id_3" class="form-input-wide"> 
+                    <select class="form-dropdown validate[required]" style="width:100px" id="input_3" name="type"> 
+                        <option selected="selected" value="{{ type }}"> {{ type }} </option>
+                        <option value="list"> list </option> 
+                        <option value="richtext"> richtext </option> 
+                        <option value="html"> html </option> 
+                        <option value="info"> info </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_38"> 
+                <label class="form-label-top" id="label_38" for="input_38"> 
+                    Cache<span class="form-required">*</span> 
+                </label> 
+                <div id="id_38" class="form-input-wide"> 
+                    <select class="form-dropdown validate[required]" style="width:80px" id="input_38" name="cache"> 
+                        
+                        <option selected="selected" value="{{ cache }}"> {{ cache }} </option> 
+                        <option value="yes"> Yes </option> 
+                        <option value="no"> No </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_9"> 
+                <label class="form-label-top" id="label_9" for="input_9"> 
+                    Auto Refresh<span class="form-required">*</span> 
+                </label> 
+                <div id="id_9" class="form-input-wide"> 
+                    <input type="text" class="form-textbox validate[required]" id="input_1" name="auto_refresh" size="10" value="{{ auto_refresh }}"/> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_45"> 
+                <label class="form-label-left" id="label_45" for="input_45"> Form Title <span class="form-required">*</span> </label> 
+                <div id="id_45" class="form-input"> 
+                    <input type="text" class="form-textbox validate[required]" id="input_45" name="form_title" size="114" value="{{ form_title }}"/> 
+                </div> 
+            </li> 
+            <li id="id_6" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_6" class="form-header"> 
+                        Left Button
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_10"> 
+                <label class="form-label-top" id="label_10" for="input_10"> Name </label> 
+                <div id="id_10" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_10" value="{{ left_button.name }}" name="left_button_name" size="28" value="Chọn" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_12"> 
+                <label class="form-label-top" id="label_12" for="input_12"> Type </label> 
+                <div id="id_12" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:80px" id="input_12" name="left_button_type"> 
+                        <option selected="selected" value="{{ left_button.type }}"> {{ left_button.type }} </option> 
+                        
+                        <option value="select"> select </option> 
+                        <option value="go to"> go to </option> 
+                        <option value="reload"> reload </option> 
+                        <option value="exit"> exit </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_34"> 
+                <label class="form-label-top" id="label_34" for="input_34"> Screen </label> 
+                <div id="id_34" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:395px" id="input_34" name="left_button_url"> 
+                        <option selected="selected" value="{{ left_button.url }}"> {{ left_button.form_title }}  </option>
+                        <option value=""> </option>
+                      {% for screen in screens_list: %}  
+                        <option value="{{screen.screen_id}}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li id="id_7" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_7" class="form-header"> 
+                        Right Button
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_13"> 
+                <label class="form-label-top" id="label_13" for="input_13"> Name </label> 
+                <div id="id_13" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_13" name="right_button_name" size="28" value="{{ right_button.name }}" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_14"> 
+                <label class="form-label-top" id="label_14" for="input_14"> Type </label> 
+                <div id="id_14" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:80px" id="input_14" name="right_button_type"> 
+                        
+                        <option selected="selected" value="{{ right_button.type }}"> {{ right_button.type }} </option> 
+                        <option value="select"> select </option> 
+                        <option value="go to"> go to </option> 
+                        <option value="reload"> reload </option> 
+                        <option value="exit"> exit </option> 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_35"> 
+                <label class="form-label-top" id="label_35" for="input_35"> Screen </label> 
+                <div id="id_35" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:395px" id="input_35" name="right_button_url"> 
+                        <option value=""></option>
+                        <option selected="selected" value="{{ right_button.url }}"> {{ right_button.form_title }}</option> 
+                      {% for screen in screens_list: %}  
+                        <option value="{{screen.screen_id}}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li id="id_17" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_17" class="form-header"> 
+                        Extra Info
+                    </h3> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_16"> 
+                <label class="form-label-left" id="label_16" for="input_16"> ContentURL </label> 
+                <div id="id_16" class="form-input"> 
+                    <input type="text" class="form-textbox" id="input_16" name="content_url" value="{{ content_url }}" size="114" /> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_19"> 
+                <label class="form-label-left" id="label_19" for="input_19"> Info </label> 
+                <div id="id_19" class="form-input"> 
+                    <textarea id="input_19" class="form-textarea" name="info" cols="113" rows="6">{{ info }}</textarea> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_23"> 
+                <label class="form-label-left" id="label_23" for="input_23"> Richtext </label> 
+                <div id="id_23" class="form-input"> 
+                    <textarea id="input_23" class="form-textarea" name="richtext" cols="113" rows="6">{{ richtext }}</textarea> 
+                </div> 
+            </li> 
+            <li id="id_24" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h3 id="header_24" class="form-header"> 
+                        Items
+                    </h3> 
+                    <div id="subHeader_24" class="form-subHeader"> 
+                        (chỉ điền nếu chọn loại hiển thị là List)
+                    </div> 
+                </div> 
+            </li> 
+            
+            {% for i in items: %}
+            <li class="form-line form-line-column" id="id_20"> 
+                <label class="form-label-top" id="label_20" for="input_20"> ItemName </label> 
+                <div id="id_20" class="form-input-wide"> 
+                    <input type="text" value="{{ i.name }}" class="form-textbox" id="input_20" name="{{ i.item_name }}" size="55" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_36"> 
+                <label class="form-label-top" id="label_36" for="input_36"> ScreenID </label> 
+                <div id="id_36" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:330px" id="input_36" name="{{ i.item_url }}"> 
+                         <option value=""></option>
+                        <option selected="selected" value="{{i.href}}"> {{i.form_title}} </option> 
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            {% endfor %}
+            
+            <li class="form-line form-line-column" id="id_25"> 
+                <label class="form-label-top" id="label_25" for="input_25"> ItemName </label> 
+                <div id="id_25" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_25" name="item100_name" size="55" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_37"> 
+                <label class="form-label-top" id="label_37" for="input_37"> ScreenID </label> 
+                <div id="id_37" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:330px" id="input_37" name="item100_url"> 
+                        <option value=""></option>
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_39"> 
+                <label class="form-label-top" id="label_39" for="input_39"> ItemName </label> 
+                <div id="id_39" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_39" name="item101_name" size="55" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_41"> 
+                <label class="form-label-top" id="label_41" for="input_41"> ScreenID </label> 
+                <div id="id_41" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:330px" id="input_41" name="item101_url"> 
+                        <option value=""></option>
+                         
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_40"> 
+                <label class="form-label-top" id="label_40" for="input_40"> ItemName </label> 
+                <div id="id_40" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_40" name="item102_name" size="55" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_43"> 
+                <label class="form-label-top" id="label_43" for="input_43"> ScreenID </label> 
+                <div id="id_43" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:330px" id="input_43" name="item102_url"> 
+                        <option value=""></option>
+                         
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_42"> 
+                <label class="form-label-top" id="label_42" for="input_42"> ItemName </label> 
+                <div id="id_42" class="form-input-wide"> 
+                    <input type="text" class="form-textbox" id="input_42" name="item103_name" size="55" /> 
+                </div> 
+            </li> 
+            <li class="form-line form-line-column" id="id_44"> 
+                <label class="form-label-top" id="label_44" for="input_44"> ScreenID </label> 
+                <div id="id_44" class="form-input-wide"> 
+                    <select class="form-dropdown" style="width:330px" id="input_44" name="item103_url"> 
+                        <option value=""></option>
+                        
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{screen.form_title}} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_2"> 
+                <div id="id_2" class="form-input-wide"> 
+                    <div style="margin-left:620px"> 
+                        <button id="input_2" type="submit" class="form-submit-button"> 
+                            <b>Lưu thay đổi</b>
+                        </button> 
+                    </div> 
+                </div> 
+            </li> 
+        </ul> 
+    </div> 
+</form></body> 
+</html>

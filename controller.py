@@ -121,4 +121,9 @@ def stats():
 
 
 if __name__ == "__main__":
-  run(server=TornadoServer, port=8888)
+  import sys
+  try:
+    port = int(sys.argv[1])
+  except:
+    port = 8888
+  run(server=TornadoServer, port=port)

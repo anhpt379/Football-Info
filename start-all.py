@@ -6,7 +6,7 @@ def update():
     system('git pull')
 
 def start_crawler():
-    system('python crawler.py &')
+    system('nohup python crawler.py &')
 
 def start_server():
     system('python controller.py')

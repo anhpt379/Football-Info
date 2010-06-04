@@ -7,19 +7,11 @@
 #
 #  More details.
 
-#def htmlencoder(s):
-#  new_string = ''
-#  for char in s:
-#    new_string = new_string + "&#%d;" % ord(char)
-#  return new_string
-#
-#print htmlencoder("p ")
+def htmlencoder(s):
+  new_string = ''
+  for char in s:
+    new_string = new_string + "&#%d;" % ord(char)
+  return new_string
 
+print htmlencoder("Phạm tuấn Anh")
 
-test = """
-Xin chào bạn, {{name}}
-"""
-sometext = test
-
-
-print template.render(name="Tuấn Anh").encode('utf-8')

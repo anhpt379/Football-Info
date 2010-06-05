@@ -65,6 +65,12 @@ class Screen:
     key = md5(key).hexdigest()
     return self.db.get(key)
 
+  def remove(self, key):
+    self.db.srem("list", key)
+    key = md5(key).hexdigest()
+    self.cache.delete(key)
+    return self.db.delete(key)
+
   def add_screen(self, screen_id, form_title, content):
     key = md5(screen_id).hexdigest()
     self.db.set(key, content)

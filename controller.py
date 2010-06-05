@@ -1,13 +1,23 @@
 #! /usr/bin/python
 #! coding: utf-8
 # pylint: disable-msg=W0311
+# pylint: disable-msg=E1101
+
+## Secret key:
+# '2ce67e8fce3cf88e7afa25f08b0332f8'
+#
 
 
-from lib.server import route, TornadoServer, run, request, response
+from lib.server import route, TornadoServer, run, request, response, redirect
 from database import Screen, Log
 from simplejson import dumps
 from jinja2 import Environment, PackageLoader
 from ast import literal_eval as eval
+
+import sys
+# Use UTF-8 for output
+reload(sys)
+sys.setdefaultencoding('utf-8')     # IGNORE:E1101
 
 
 db = Screen()
@@ -16,8 +26,20 @@ log = Log()
 env = Environment(loader=PackageLoader('views', 'templates'))
 
 
+@route("/authen")
+def set_cookies():
+  secret_key = request.params['secret_key']
+  if secret_key == '2ce67e8fce3cf88e7afa25f08b0332f8':
+      response.COOKIES['secret_key'] = request.GET['secret_key']
+  redirect("/manager")
+
 @route("/add")
 def add_screen():
+  secret_key = request.COOKIES.get('secret_key')
+  if secret_key != '2ce67e8fce3cf88e7afa25f08b0332f8':
+    return "Authentication Failure!"
+
+
   data = request.params
   screen_id = data['screen_id']
   form_title = data["form_title"]
@@ -47,9 +69,11 @@ def add_screen():
     template = env.get_template('info.json')
   elif type == "richtext":
     data['richtext'] = data['richtext'].replace("\r\n", " ")
+    data['richtext'] = data['richtext'].replace("\"", "\\\"")
     template = env.get_template('richtext.json')
   elif type == "html":
     template = env.get_template('html.json')
+
 
   content = template.render(data)
 #  content = dumps(eval(content), indent=2)
@@ -63,6 +87,10 @@ def add_screen():
 
 @route('/edit')
 def edit():
+  secret_key = request.COOKIES.get('secret_key')
+  if secret_key != '2ce67e8fce3cf88e7afa25f08b0332f8':
+    return "Authentication Failure!"
+
   data = db.get(request.params['screen_id'])
   data = eval(data)
   data["screen_id"] = request.params['screen_id']
@@ -84,11 +112,27 @@ def edit():
         continue
   template = env.get_template('edit.html')
   data["screens_list"] = db.get_suggest()
+  print data
   return template.render(data)
 
 
 @route("/manager")
 def manager():
+  secret_key = request.COOKIES.get('secret_key')
+  if secret_key != '2ce67e8fce3cf88e7afa25f08b0332f8':
+    return "Authentication Failure!"
+  data = {}
+  data["screens_list"] = db.get_suggest()
+  template = env.get_template('manager.html')
+  data["screens_list"] = db.get_suggest()
+  return template.render(data)
+
+@route("/remove")
+def remove():
+  secret_key = request.COOKIES.get('secret_key')
+  if secret_key != '2ce67e8fce3cf88e7afa25f08b0332f8':
+    return "Authentication Failure!"
+  db.remove(request.params['screen_id'])
   data = {}
   data["screens_list"] = db.get_suggest()
   template = env.get_template('manager.html')
@@ -107,11 +151,11 @@ def list():
     return 'None'
 
 
-@route('/open')
-def open():
+@route('/:screen_id')
+def open(screen_id):
   response.header['Content-Type'] = 'application/json'
   log.insert(request.address)
-  data = db.get(request.params['screen_id'])
+  data = db.get(screen_id)
   content = dumps(eval(data), indent=2, ensure_ascii=False)
   return content
 

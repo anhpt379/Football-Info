@@ -68,6 +68,7 @@
 <body> 
 
 
+
 <form class="jotform-form" action="/edit" method="get" name="edit_screen_content" id="1532639198" accept-charset="utf-8"> 
     <div class="form-all"> 
         <ul class="form-section"> 
@@ -126,6 +127,15 @@
 <form class="jotform-form" action="/add" method="get" name="form_1534611120" id="1534611120" accept-charset="utf-8"> 
     <div class="form-all"> 
         <ul class="form-section"> 
+        <li class="form-line" id="id_2"> 
+                <div id="id_2" class="form-input-wide"> 
+                    <div style="margin-left:620px"> 
+                        <button id="input_2" type="submit" class="form-submit-button"> 
+                            <b>Lưu thay đổi</b>
+                        </button> 
+                    </div> 
+                </div> 
+            </li> 
             <li id="id_5" class="form-input-wide"> 
                 <div class="form-header-group"> 
                     <h2 id="header_5" class="form-header"> 
@@ -397,5 +407,44 @@
             </li> 
         </ul> 
     </div> 
-</form></body> 
+</form>
+
+
+<form class="jotform-form" action="/remove" method="get" name="remove_screen" id="1532639198" accept-charset="utf-8"> 
+    <div class="form-all"> 
+        <ul class="form-section"> 
+            <li id="id_50" class="form-input-wide"> 
+                <div class="form-header-group"> 
+                    <h2 id="header_5" class="form-header"> 
+                        Xóa
+                    </h2> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_1"> 
+                <label class="form-label-left" id="label_1" for="input_1"> Edit </label> 
+                <div id="id_1" class="form-input"> 
+                    <select class="form-dropdown" style="width:578px" id="input_1" name="screen_id"> 
+                      {% for screen in screens_list: %}  
+                        <option value="{{ screen.screen_id }}"> {{ screen.form_title }} </option> 
+                      {% endfor %} 
+                    </select> 
+                </div> 
+            </li> 
+            <li class="form-line" id="id_2"> 
+                <div id="id_2" class="form-input-wide"> 
+                    <div style="margin-left:635px"> 
+                        <button id="input_2" type="submit" class="form-submit-button"> 
+                            <b>Xóa </b>
+                        </button> 
+                    </div> 
+                </div> 
+            </li> 
+        </ul> 
+    </div> 
+    <input type="hidden" id="simple_spc" name="simple_spc" value="1532639198" /> 
+    <script type="text/javascript"> 
+        document.getElementById("si" + "mple" + "_spc").value = "1532639198-1532639198";
+    </script> 
+</form>
+</body> 
 </html>

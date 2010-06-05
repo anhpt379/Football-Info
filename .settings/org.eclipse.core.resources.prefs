@@ -1,0 +1,22 @@
+#Sat Jun 05 14:06:18 ICT 2010
+eclipse.preferences.version=1
+encoding//data/y_kien_chuyen_gia.txt=utf-8
+encoding//lib/server.py=utf-8
+encoding//lib/text_processing.py=utf-8
+encoding//lib/unicode2html.py=utf-8
+encoding//templates/archive/controller.py=utf-8
+encoding//templates/archive/render.py=utf-8
+encoding//templates/archive/test.py=utf-8
+encoding//templates/archive/test_template.py=utf-8
+encoding/auto_renderer.py=utf-8
+encoding/configure.py=utf-8
+encoding/controller.py=utf-8
+encoding/crawler.py=utf-8
+encoding/database.py=utf-8
+encoding/export.py=utf-8
+encoding/request.py=utf-8
+encoding/server_controller.py=utf-8
+encoding/settings.py=utf-8
+encoding/start-all.py=utf-8
+encoding/test_cookie.py=utf-8
+encoding/views.py=utf-8

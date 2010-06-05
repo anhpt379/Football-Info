@@ -1,17 +1,17 @@
 {
     "type": "richtext",
-    "cache": "{{cache}}",
+    "cache": "{{ cache }}",
     "left_button": {
-                     "type": "{{left_button_type}}", 
-                     "name": "{{left_button_name}}",
-                     "url": "{{left_button_url}}"
+                     "type": "{{ left_button_type }}", 
+                     "name": "{{ left_button_name }}",
+                     "url": "{{ left_button_url }}"
                    },
     "right_button": {
-                     "type": "{{right_button_type}}", 
-                     "name": "{{right_button_name}}", 
-                     "url": "{{right_button_url}}"
+                     "type": "{{ right_button_type }}", 
+                     "name": "{{ right_button_name }}", 
+                     "url": "{{ right_button_url }}"
                     },
-    "auto_refresh": "{{auto_refresh}}",
-    "form_title": "{{form_title}}",
-    "richtext": "{{richtext}}"
+    "auto_refresh": "{{ auto_refresh }}",
+    "form_title": "{{ form_title}}",
+    "richtext": "{{ richtext }}"
 }

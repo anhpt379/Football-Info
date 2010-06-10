@@ -1,4 +1,4 @@
-#Sat Jun 05 14:06:18 ICT 2010
+#Thu Jun 10 16:22:29 ICT 2010
 eclipse.preferences.version=1
 encoding//data/y_kien_chuyen_gia.txt=utf-8
 encoding//lib/server.py=utf-8
@@ -18,5 +18,3 @@ encoding/request.py=utf-8
 encoding/server_controller.py=utf-8
 encoding/settings.py=utf-8
 encoding/start-all.py=utf-8
-encoding/test_cookie.py=utf-8
-encoding/views.py=utf-8

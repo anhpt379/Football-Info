@@ -11,8 +11,9 @@
 from lib.server import route, TornadoServer, run, request, response, redirect
 from database import Screen, Log
 from simplejson import dumps
-from jinja2 import Environment, PackageLoader
+from jinja2 import Environment, FileSystemLoader
 from ast import literal_eval as eval
+from hashlib import md5
 
 import sys
 # Use UTF-8 for output
@@ -23,7 +24,7 @@ sys.setdefaultencoding('utf-8')     # IGNORE:E1101
 db = Screen()
 log = Log()
 
-env = Environment(loader=PackageLoader('views', 'templates'))
+env = Environment(loader=FileSystemLoader('templates'))
 
 
 @route("/authen")
@@ -72,6 +73,12 @@ def add_screen():
     data['richtext'] = data['richtext'].replace("\"", "\\\"")
     template = env.get_template('richtext.json')
   elif type == "html":
+    html_code = data["html_code"]
+    html_id = md5("html_" + html_code).hexdigest()
+    db.set(html_id, html_code)
+    url = "html/%s" % html_id
+    data.pop("html_code")
+    data["content_url"] = url
     template = env.get_template('html.json')
 
 
@@ -101,6 +108,11 @@ def edit():
     data["left_button"]["form_title"] = db.get_cache(data["left_button"]["url"])["form_title"]
   except:
     pass
+
+  if "content_url" in data:
+    html_id = data["content_url"].replace("html/", "")
+    html_code = db.get(html_id)
+    data["html_code"] = html_code
 
   if 'items' in data.keys():
     for i in data['items']:
@@ -150,6 +162,11 @@ def list():
   except:
     return 'None'
 
+@route("/html/:html_id")
+def get_html(html_id):
+  response.header['Content-Type'] = 'text/html'
+  log.insert(request.address)
+  return db.get(html_id)
 
 @route('/:screen_id')
 def open(screen_id):

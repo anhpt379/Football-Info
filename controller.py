@@ -85,7 +85,7 @@ def add_screen():
   content = template.render(data)
 #  content = dumps(eval(content), indent=2)
   db.add_screen(screen_id, form_title, content)
-  print content
+#  print content
 
   template = env.get_template('manager.html')
   data["screens_list"] = db.get_suggest()
@@ -124,7 +124,7 @@ def edit():
         continue
   template = env.get_template('edit.html')
   data["screens_list"] = db.get_suggest()
-  print data
+#  print data
   return template.render(data)
 
 
